@@ -3,7 +3,7 @@ package main
 import (
 	// "bufio"
 	"fmt"
-	"github.com/prestonTao/upnp"
+	"github.com/scottjg/upnp"
 	// "os"
 )
 
@@ -20,8 +20,8 @@ func SearchGateway() {
 	if err != nil {
 		fmt.Println(err.Error())
 	} else {
-		fmt.Println("本机ip地址：", upnpMan.LocalHost)
-		fmt.Println("upnp设备地址：", upnpMan.Gateway.Host)
+		fmt.Println("Local IP Address：", upnpMan.LocalHost)
+		fmt.Println("UPNP Device IP Address:", upnpMan.Gateway.Host)
 	}
 }
 
@@ -32,7 +32,7 @@ func ExternalIPAddr() {
 	if err != nil {
 		fmt.Println(err.Error())
 	} else {
-		fmt.Println("外网ip地址为：", upnpMan.GatewayOutsideIP)
+		fmt.Println("External Network IP Address:", upnpMan.GatewayOutsideIP)
 	}
 }
 
@@ -40,10 +40,10 @@ func ExternalIPAddr() {
 func AddPortMapping() {
 	mapping := new(upnp.Upnp)
 	if err := mapping.AddPortMapping(55789, 55789, "TCP"); err == nil {
-		fmt.Println("端口映射成功")
+		fmt.Println("Port mapping succeeded.")
 		mapping.Reclaim()
 	} else {
-		fmt.Println("端口映射失败")
+		fmt.Println("Port mapping failed.")
 	}
 
 }

@@ -75,7 +75,7 @@ func simple1() {
 }
 
 func searchDevice(localAddr, remoteAddr string) string {
-	fmt.Println("搜素网关设备")
+	fmt.Println("Searching for gateway device...")
 	msg := "M-SEARCH * HTTP/1.1\r\n" +
 		"HOST: 239.255.255.250:1900\r\n" +
 		"ST: urn:schemas-upnp-org:device:InternetGatewayDevice:1\r\n" +
@@ -99,7 +99,7 @@ func searchDevice(localAddr, remoteAddr string) string {
 }
 
 func readDeviceDesc(rAddr string) string {
-	fmt.Println("查看设备描述")
+	fmt.Println("Fetching device description...")
 	msg := "GET /igd.xml HTTP/1.1\r\n" +
 		"User-Agent: Java/1.7.0_45\r\n" +
 		"Host: 192.168.1.1:1900\r\n" +
@@ -148,7 +148,7 @@ func readDeviceDesc(rAddr string) string {
 
 func getDeviceStatusInfo(rAddr string) {
 
-	fmt.Println("查看设备状态")
+	fmt.Println("Fetching device status...")
 
 	readMappingBody := `<?xml version="1.0"?>
 	<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
@@ -182,7 +182,7 @@ func getDeviceStatusInfo(rAddr string) {
 
 func addPortMapping(rAddr string) {
 
-	fmt.Println("添加一个端口映射")
+	fmt.Println("Adding a port mapping...")
 
 	readMappingBody := `<?xml version="1.0"?>
 <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
@@ -225,7 +225,7 @@ func addPortMapping(rAddr string) {
 }
 
 func remotePort(rAddr string) {
-	fmt.Println("删除一个端口映射")
+	fmt.Println("Deleting a port mapping...")
 
 	readMappingBody := `<?xml version="1.0"?>
 <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">

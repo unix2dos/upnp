@@ -16,7 +16,7 @@ func GetLocalIntenetIp() string {
 
 	conn, err := net.Dial("udp", "google.com:80")
 	if err != nil {
-		panic(errors.New("不能连接网络"))
+		panic(errors.New("Can not connect to network"))
 	}
 	defer conn.Close()
 	return strings.Split(conn.LocalAddr().String(), ":")[0]

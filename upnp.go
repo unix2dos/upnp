@@ -104,7 +104,7 @@ func (this *Upnp) SearchGateway() (err error) {
 	if searchGateway.Send() {
 		return nil
 	}
-	return errors.New("未发现网关设备")
+	return errors.New("No gateway device found")
 }
 
 func (this *Upnp) deviceStatus() {
@@ -142,7 +142,7 @@ func (this *Upnp) ExternalIPAddr() (err error) {
 func (this *Upnp) AddPortMapping(localPort, remotePort int, protocol string) (err error) {
 	defer func(err error) {
 		if errTemp := recover(); errTemp != nil {
-			log.Println("upnp模块报错了", errTemp)
+			log.Println("upnp module being given", errTemp)
 			err = errTemp.(error)
 		}
 	}(err)
@@ -159,7 +159,7 @@ func (this *Upnp) AddPortMapping(localPort, remotePort int, protocol string) (er
 	} else {
 		this.Active = false
 		// log.Println("添加一个端口映射失败")
-		return errors.New("添加一个端口映射失败")
+		return errors.New("Adding a port mapping failed")
 	}
 }
 
@@ -168,7 +168,7 @@ func (this *Upnp) DelPortMapping(remotePort int, protocol string) bool {
 	issuccess := delMapping.Send(remotePort, protocol)
 	if issuccess {
 		this.MappingPort.delMapping(remotePort, protocol)
-		log.Println("删除了一个端口映射： remote:", remotePort)
+		log.Println("Removed a port mapping: remote:", remotePort)
 	}
 	return issuccess
 }

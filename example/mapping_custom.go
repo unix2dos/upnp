@@ -3,7 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"github.com/prestonTao/upnp"
+	"github.com/scottjg/upnp"
 	"os"
 	"strconv"
 	"strings"
@@ -25,10 +25,10 @@ func main() {
 
 func Start() {
 	if !CheckNet() {
-		fmt.Println("你的路由器不支持upnp协议")
+		fmt.Println("Your router does not support the UPnP protocol.")
 		return
 	}
-	fmt.Println("本机ip地址：", mapping.LocalHost)
+	fmt.Println("Local IP Address: ", mapping.LocalHost)
 
 	ExternalIPAddr()
 
@@ -41,11 +41,11 @@ tag:
 	}
 
 	fmt.Println("--------------------------------------")
-	fmt.Println("1.  stop    停止程序并回收映射的端口")
-	fmt.Println("2.  add     添加一个端口映射")
-	fmt.Println("3.  del     手动删除一个端口映射")
-	fmt.Println("\n 注意：此程序映射的端口默认是TCP端口")
-	fmt.Println("       需要映射udp端口请访问：")
+	fmt.Println("1.  stop    stop the program and reclaim mapped port")
+	fmt.Println("2.  add     add a port mapping")
+	fmt.Println("3.  del     manually delete a port mapping")
+	fmt.Println("\n NOTE: This progrma maps tcp ports. If you need to")
+	fmt.Println("       map a UDP port, please visit：")
 	fmt.Println("       http://github.com/prestonTao/upnp")
 	fmt.Println("--------------------------------------")
 
@@ -92,7 +92,7 @@ func ExternalIPAddr() {
 	if err != nil {
 		fmt.Println(err.Error())
 	} else {
-		fmt.Println("外网ip地址为：", mapping.GatewayOutsideIP)
+		fmt.Println("External network IP address: ", mapping.GatewayOutsideIP)
 	}
 }
 
@@ -101,27 +101,27 @@ func ExternalIPAddr() {
 */
 func GetInput() bool {
 	var err error
-	fmt.Println("请输入要映射的本地端口：")
+	fmt.Println("Enter the local port to map: ")
 	data, _, _ := reader.ReadLine()
 	localPort, err = strconv.Atoi(string(data))
 	if err != nil {
-		fmt.Println("输入的端口号错误，请输入 0-65535 的数字")
+		fmt.Println("Invalid port, please specify a valid port between 0-65535")
 		return false
 	}
 	if localPort < 0 || localPort > 65535 {
-		fmt.Println("输入的端口号错误，请输入 0-65535 的数字")
+		fmt.Println("Invalid port, please specify a valid port between 0-65535")
 		return false
 	}
 
-	fmt.Println("请输入要映射到外网的端口：")
+	fmt.Println("Please enter the external port to be mapped:")
 	data, _, _ = reader.ReadLine()
 	remotePort, err = strconv.Atoi(string(data))
 	if err != nil {
-		fmt.Println("输入的端口号错误，请输入 0-65535 的数字")
+		fmt.Println("Invalid port, please specify a valid port between 0-65535")
 		return false
 	}
 	if remotePort < 0 || remotePort > 65535 {
-		fmt.Println("输入的端口号错误，请输入 0-65535 的数字")
+		fmt.Println("Invalid port, please specify a valid port between 0-65535")
 		return false
 	}
 	return true
@@ -133,10 +133,10 @@ func GetInput() bool {
 func AddPortMapping(localPort, remotePort int) bool {
 	//添加一个端口映射
 	if err := mapping.AddPortMapping(localPort, remotePort, "TCP"); err == nil {
-		fmt.Println("端口映射成功")
+		fmt.Println("Port mapped successfully")
 		return true
 	} else {
-		fmt.Println("端口映射失败")
+		fmt.Println("Port failed to map")
 		return false
 	}
 }

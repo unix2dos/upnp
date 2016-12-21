@@ -1,6 +1,6 @@
 
 
-设备描述回复
+Device description reply
 
 <root xmlns="urn:schemas-upnp-org:device-1-0">
 <specVersion>
@@ -81,7 +81,7 @@ e>
 </root>
 
 
-设备状态 请求
+Device status request
 
 POST /ipc HTTP/1.1
 Content-Type: text/xml
@@ -101,7 +101,7 @@ Content-Length: 311
 </SOAP-ENV:Envelope>
 
 
-设备状态 回复
+Device status reply
 
 HTTP/1.1 200 OK
 CONNECTION: close
@@ -122,7 +122,7 @@ CONTENT-TYPE: text/xml; charset="utf-8"
 
 
 
-请求已经映射的端口号列表
+Requests a list of port numbers that have been mapped
 
 POST /ipc HTTP/1.1
 Content-Type: text/xml
@@ -144,7 +144,7 @@ Content-Length: 343
 
 
 
-返回已经映射到端口号列表
+Returns a list that has been mapped to the port number
 
 HTTP/1.1 500 Internal Server Error
 CONNECTION: close
@@ -171,7 +171,7 @@ SERVER: Wireless N Router WR845N, UPnP/1.0
 
 
 
-查看普通端口列表 请求
+View the normal port list request
 
 POST /ipc HTTP/1.1
 Content-Type: text/xml
@@ -193,7 +193,7 @@ Content-Length: 381
 
 
 
-回复
+Reply
 
 HTTP/1.1 500 Internal Server Error
 CONNECTION: close
@@ -219,7 +219,7 @@ SERVER: Wireless N Router WR845N, UPnP/1.0
 </SOAP-ENV:Envelope>
 
 
-获得外网ip地址 请求
+Access to external network ip address request
 
 POST /ipc HTTP/1.1
 Content-Type: text/xml
@@ -239,7 +239,7 @@ Content-Length: 325
 </SOAP-ENV:Envelope>
 
 
-获得外网ip地址 回复
+Access to external network ip address reply
 
 HTTP/1.1 200 OK
 CONNECTION: close
@@ -261,7 +261,7 @@ CONTENT-TYPE: text/xml; charset="utf-8"
 
 
 
-得到明确的端口映射列表 请求
+Obtain an explicit port map list request
 
 POST /ipc HTTP/1.1
 Content-Type: text/xml
@@ -285,7 +285,7 @@ Content-Length: 439
 </SOAP-ENV:Envelope>
 
 
-回复
+Reply
 
 HTTP/1.1 500 Internal Server Error
 CONNECTION: close
@@ -312,7 +312,7 @@ SERVER: Wireless N Router WR845N, UPnP/1.0
 
 
 
-添加端口映射 请求
+Add a port mapping request
 
 POST /ipc HTTP/1.1
 Content-Type: text/xml
@@ -339,7 +339,7 @@ Content-Length: 627
   </SOAP-ENV:Body>
 </SOAP-ENV:Envelope>
 
-回复
+Reply
 
 HTTP/1.1 200 OK
 CONNECTION: close
@@ -354,7 +354,7 @@ CONTENT-TYPE: text/xml; charset="utf-8"
 </SOAP-ENV:Envelope>
 
 
-删除端口映射 请求
+Remove the port mapping request
 
 POST /ipc HTTP/1.1
 Content-Type: text/xml
@@ -378,7 +378,7 @@ Content-Length: 419
 
 
 
-回复
+Reply
 
 HTTP/1.1 200 OK
 CONNECTION: close

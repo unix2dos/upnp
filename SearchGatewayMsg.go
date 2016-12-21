@@ -62,26 +62,26 @@ func (this *SearchGateway) send(c chan string) {
 	}(conn)
 	remotAddr, err := net.ResolveUDPAddr("udp", "239.255.255.250:1900")
 	if err != nil {
-		log.Println("组播地址格式不正确")
+		log.Println("The multicast address format is incorrect")
 	}
 	locaAddr, err := net.ResolveUDPAddr("udp", this.upnp.LocalHost+":")
 
 	if err != nil {
-		log.Println("本地ip地址格式不正确")
+		log.Println("The local ip address is not in the correct format")
 	}
 	conn, err = net.ListenUDP("udp", locaAddr)
 	defer conn.Close()
 	if err != nil {
-		log.Println("监听udp出错")
+		log.Println("Failed to bind udp multicast socket")
 	}
 	_, err = conn.WriteToUDP([]byte(this.searchMessage), remotAddr)
 	if err != nil {
-		log.Println("发送msg到组播地址出错")
+		log.Println("An error occurred sending msg to the multicast address")
 	}
 	buf := make([]byte, 1024)
 	n, _, err := conn.ReadFromUDP(buf)
 	if err != nil {
-		log.Println("从组播地址接搜消息出错")
+		log.Println("An error occurred reading the multicast address search message")
 	}
 
 	result := string(buf[:n])
