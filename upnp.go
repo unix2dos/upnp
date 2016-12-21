@@ -72,15 +72,16 @@ func (this *MappingPortStruct) GetAllMapping() map[string][][]int {
 }
 
 type Upnp struct {
-	Active             bool              //这个upnp协议是否可用
-	LocalHost          string            //本机ip地址
-	GatewayInsideIP    string            //局域网网关ip
-	GatewayOutsideIP   string            //网关公网ip
-	OutsideMappingPort map[string]int    //映射外部端口
-	InsideMappingPort  map[string]int    //映射本机端口
-	Gateway            *Gateway          //网关信息
-	CtrlUrl            string            //控制请求url
-	MappingPort        MappingPortStruct //已经添加了的映射 {"TCP":[1990],"UDP":[1991]}
+	Active              bool //这个upnp协议是否可用
+	DurationUnsupported bool
+	LocalHost           string            //本机ip地址
+	GatewayInsideIP     string            //局域网网关ip
+	GatewayOutsideIP    string            //网关公网ip
+	OutsideMappingPort  map[string]int    //映射外部端口
+	InsideMappingPort   map[string]int    //映射本机端口
+	Gateway             *Gateway          //网关信息
+	CtrlUrl             string            //控制请求url
+	MappingPort         MappingPortStruct //已经添加了的映射 {"TCP":[1990],"UDP":[1991]}
 }
 
 //得到本地联网的ip地址
@@ -139,7 +140,7 @@ func (this *Upnp) ExternalIPAddr() (err error) {
 }
 
 //添加一个端口映射
-func (this *Upnp) AddPortMapping(localPort, remotePort int, protocol string) (err error) {
+func (this *Upnp) AddPortMapping(localPort, remotePort, duration int, protocol string, desc string) (err error) {
 	defer func(err error) {
 		if errTemp := recover(); errTemp != nil {
 			log.Println("upnp module being given", errTemp)
@@ -152,7 +153,7 @@ func (this *Upnp) AddPortMapping(localPort, remotePort int, protocol string) (er
 		}
 	}
 	addPort := AddPortMapping{upnp: this}
-	if issuccess := addPort.Send(localPort, remotePort, protocol); issuccess {
+	if issuccess := addPort.Send(localPort, remotePort, duration, protocol, desc); issuccess {
 		this.MappingPort.addMapping(localPort, remotePort, protocol)
 		// log.Println("添加一个端口映射：protocol:", protocol, "local:", localPort, "remote:", remotePort)
 		return nil

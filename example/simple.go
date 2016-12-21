@@ -39,7 +39,7 @@ func ExternalIPAddr() {
 //添加一个端口映射
 func AddPortMapping() {
 	mapping := new(upnp.Upnp)
-	if err := mapping.AddPortMapping(55789, 55789, "TCP"); err == nil {
+	if err := mapping.AddPortMapping(55789, 55789, 0, "TCP"); err == nil {
 		fmt.Println("Port mapping succeeded.")
 		mapping.Reclaim()
 	} else {
