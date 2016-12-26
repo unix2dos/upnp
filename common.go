@@ -14,7 +14,7 @@ func GetLocalIntenetIp() string {
 	  判断能联网的ip地址
 	*/
 
-	conn, err := net.Dial("udp", "google.com:80")
+	conn, err := net.Dial("udp4", "google.com:80")
 	if err != nil {
 		panic(errors.New("Can not connect to network"))
 	}
