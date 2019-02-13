@@ -1,7 +1,6 @@
 package upnp
 
 import (
-	// "fmt"
 	"errors"
 	"log"
 	"sync"
@@ -13,7 +12,7 @@ import (
 
 //对所有的端口进行管理
 type MappingPortStruct struct {
-	lock         *sync.Mutex
+	lock         sync.Mutex
 	mappingPorts map[string][][]int
 }
 
@@ -56,7 +55,7 @@ func (this *MappingPortStruct) delMapping(remotePort int, protocol string) {
 	if this.mappingPorts == nil {
 		return
 	}
-	tmp := MappingPortStruct{lock: new(sync.Mutex)}
+	tmp := MappingPortStruct{}
 	mappings := this.mappingPorts[protocol]
 	for i := 0; i < len(mappings[0]); i++ {
 		if mappings[1][i] == remotePort {
@@ -95,12 +94,10 @@ func (this *Upnp) SearchGateway() (err error) {
 	}(err)
 
 	if this.LocalHost == "" {
-		this.MappingPort = MappingPortStruct{
-			lock: new(sync.Mutex),
-			// mappingPorts: map[string][][]int{},
-		}
+		this.MappingPort = MappingPortStruct{}
 		this.LocalHost = GetLocalIntenetIp()
 	}
+
 	searchGateway := SearchGateway{upnp: this}
 	if searchGateway.Send() {
 		return nil

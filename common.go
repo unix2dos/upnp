@@ -1,19 +1,12 @@
 package upnp
 
 import (
-	// "log"
 	"errors"
 	"net"
 	"strings"
 )
 
-//获取本机能联网的ip地址
 func GetLocalIntenetIp() string {
-	/*
-	  获得所有本机地址
-	  判断能联网的ip地址
-	*/
-
 	conn, err := net.Dial("udp4", "google.com:80")
 	if err != nil {
 		panic(errors.New("Can not connect to network"))
